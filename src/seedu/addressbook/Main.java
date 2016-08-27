@@ -9,6 +9,9 @@ import seedu.addressbook.parser.Parser;
 import seedu.addressbook.storage.StorageFile;
 import seedu.addressbook.ui.TextUi;
 
+import static seedu.addressbook.storage.StorageFile.DOES_NOT_ALREADY_EXIST;
+import static seedu.addressbook.storage.StorageFile.ALREADY_EXISTS;
+
 import java.util.List;
 import java.util.Optional;
 
@@ -106,7 +109,7 @@ public class Main {
         try {
             command.setData(addressBook, lastShownList);
             CommandResult result = command.execute();
-            storage.save(addressBook);
+            storage.save(addressBook, ALREADY_EXISTS);
             return result;
         } catch (Exception e) {
             ui.showToUser(e.getMessage());

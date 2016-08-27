@@ -16,6 +16,9 @@ import java.nio.file.Paths;
  * Represents the file used to store address book data.
  */
 public class StorageFile {
+	/** Constants for handling whether the storage file already exists or not */ 
+	public static final boolean ALREADY_EXISTS = true;
+	public static final boolean DOES_NOT_ALREADY_EXIST = false;
 
     /** Default file path used if the user doesn't provide the file name. */
     public static final String DEFAULT_STORAGE_FILEPATH = "addressbook.txt";
@@ -83,7 +86,11 @@ public class StorageFile {
      *
      * @throws StorageOperationException if there were errors converting and/or storing data to file.
      */
-    public void save(AddressBook addressBook) throws StorageOperationException {
+    public void save(AddressBook addressBook, boolean shouldAlreadyExist) throws StorageOperationException {
+    	// Catch error where user deletes storage while program is running
+    	if (!path.toFile().isFile() && shouldAlreadyExist) {
+    		throw new StorageOperationException("File was deleted during program execution: " + path);
+    	}
 
         /* Note: Note the 'try with resource' statement below.
          * More info: https://docs.oracle.com/javase/tutorial/essential/exceptions/tryResourceClose.html
@@ -128,7 +135,7 @@ public class StorageFile {
         // create empty file if not found
         } catch (FileNotFoundException fnfe) {
             final AddressBook empty = new AddressBook();
-            save(empty);
+            save(empty, DOES_NOT_ALREADY_EXIST);
             return empty;
 
         // other errors
