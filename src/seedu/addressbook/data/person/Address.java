@@ -12,11 +12,17 @@ public class Address {
 	public static final String MESSAGE_ADDRESS_CONSTRAINTS = "Person addresses need to be in the form BLOCK, STREET, UNIT, POSTAL_CODE";
 	public static final String ADDRESS_VALIDATION_REGEX = ".+?, .+?, .+?, .+";
 
-	public final Block block;
-	public final Street street;
-	public final Unit unit;
-	public final PostalCode postalCode;
+	private final Block block;
+	private final Street street;
+	private final Unit unit;
+	private final PostalCode postalCode;
 	private boolean isPrivate;
+	
+	private final String ADDRESS_SPLIT = ", ";
+	private final int BLOCK_INDEX = 0;
+	private final int STREET_INDEX = 1;
+	private final int UNIT_INDEX = 1;
+	private final int POSTALCODE_INDEX = 1;
 
 	/**
 	 * Validates given address.
@@ -29,11 +35,11 @@ public class Address {
 		if (!isValidAddress(address)) {
 			throw new IllegalValueException(MESSAGE_ADDRESS_CONSTRAINTS);
 		}
-		String[] parts = address.split(", ");
-		this.block = new Block(parts[0]);
-		this.street = new Street(parts[1]);
-		this.unit = new Unit(parts[2]);
-		this.postalCode = new PostalCode(parts[3]);
+		String[] parts = address.split(ADDRESS_SPLIT);
+		this.block = new Block(parts[BLOCK_INDEX]);
+		this.street = new Street(parts[STREET_INDEX]);
+		this.unit = new Unit(parts[UNIT_INDEX]);
+		this.postalCode = new PostalCode(parts[POSTALCODE_INDEX]);
 	}
 
 	/**
@@ -44,7 +50,10 @@ public class Address {
 	}
 	
 	public String getValue() {
-		return block.getValue() + ", " + street.getValue() + ", " + unit.getValue() + ", " + postalCode.getValue();
+		return block.getValue() + ADDRESS_SPLIT
+				+ street.getValue() + ADDRESS_SPLIT
+				+ unit.getValue() + ADDRESS_SPLIT 
+				+ postalCode.getValue();
 	}
 
 	@Override
