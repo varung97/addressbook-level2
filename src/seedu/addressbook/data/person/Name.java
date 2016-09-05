@@ -66,6 +66,6 @@ public class Name {
      * Two names are considered similar if ...
      */
      public boolean isSimilar(Name other) {
-    	 return other.equals(this);
+    	 return other.equals(this) || other.toString().toLowerCase().equals(this.toString().toLowerCase());
      }
 }

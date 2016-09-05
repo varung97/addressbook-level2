@@ -35,4 +35,19 @@ public class NameTest {
 	public void same_name() throws IllegalValueException {
 		assertTrue(name.isSimilar(new Name("John Smith")));
 	}
+	
+	@Test
+	public void lowercase_name() throws IllegalValueException {
+		assertTrue(name.isSimilar(new Name("john smith")));
+	}
+
+	@Test
+	public void uppercase_name() throws IllegalValueException {
+		assertTrue(name.isSimilar(new Name("JOHN SMITH")));
+	}
+	
+	@Test
+	public void mixedcase_name() throws IllegalValueException {
+		assertTrue(name.isSimilar(new Name("JoHn smitH")));
+	}
 }
