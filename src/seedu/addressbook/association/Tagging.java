@@ -29,6 +29,6 @@ public class Tagging {
 	public String toString() {
 		return type == Type.ADDED ? "+" : "-" + " "
 			   + person.getName() + " "
-			   + tag.tagName;
+			   + tag.toString();
 	}
 }
