@@ -69,6 +69,6 @@ public class Name {
      public boolean isSimilar(Name other) {
     	 return other.equals(this)
     			 || other.toString().toLowerCase().equals(this.toString().toLowerCase())
-    			 || new HashSet<>(Arrays.asList(other.toString().split(" "))).equals(new HashSet<>(Arrays.asList(this.toString().split(" "))));
+    			 || new HashSet<>(Arrays.asList(other.toString().toLowerCase().split(" "))).equals(new HashSet<>(Arrays.asList(this.toString().toLowerCase().split(" "))));
      }
 }
