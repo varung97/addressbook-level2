@@ -50,4 +50,9 @@ public class NameTest {
 	public void mixedcase_name() throws IllegalValueException {
 		assertTrue(name.isSimilar(new Name("JoHn smitH")));
 	}
+	
+	@Test
+	public void different_order() throws IllegalValueException {
+		assertTrue(name.isSimilar(new Name("Smith John")));
+	}
 }
