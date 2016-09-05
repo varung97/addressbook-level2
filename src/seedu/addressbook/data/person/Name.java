@@ -70,6 +70,7 @@ public class Name {
     	 return other.equals(this)
     			 || other.toString().toLowerCase().equals(this.toString().toLowerCase())
     			 || new HashSet<>(Arrays.asList(other.toString().toLowerCase().split(" "))).equals(new HashSet<>(Arrays.asList(this.toString().toLowerCase().split(" "))))
-    			 || this.toString().contains(other.toString());
+    			 || this.toString().contains(other.toString())
+    			 || other.toString().contains(this.toString());
      }
 }

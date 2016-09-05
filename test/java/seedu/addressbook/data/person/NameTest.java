@@ -65,4 +65,9 @@ public class NameTest {
 	public void subset_order() throws IllegalValueException {
 		assertTrue(name.isSimilar(new Name("Smith")));
 	}
+	
+	@Test
+	public void superset_order() throws IllegalValueException {
+		assertTrue(name.isSimilar(new Name("John Smith Brown")));
+	}
 }
