@@ -30,4 +30,9 @@ public class NameTest {
 	public void name_with_numbers() throws IllegalValueException {
 		name.isSimilar(new Name("1231"));
 	}
+	
+	@Test
+	public void same_name() throws IllegalValueException {
+		assertTrue(name.isSimilar(new Name("John Smith")));
+	}
 }
